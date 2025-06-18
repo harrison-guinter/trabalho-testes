@@ -44,7 +44,8 @@ public class TesteLogin {
 	public static Collection<Object[]> getCollection() {
 		return Arrays.asList(new Object[][] {
 			{"tiago@gmail.com", "senha_incorreta", page.getPathMensagemSenhaIncorreta(), page.getMsgSenhaIncorreta()},
-			{"tiago@gmail.com", "123abc", page.getPathMensagemSenhaIncorreta(), page.getMsgSenhaIncorreta()}
+			{"tiago@gmail.com", "123abc", page.getPathMensagemSenhaIncorreta(), page.getMsgSenhaIncorreta()},
+			{"harrison.dietze@aluno.feliz.ifrs.edu.br", "IronBridgeFC",  page.getPathMensagemSenhaIncorreta(), page.getMsgSenhaIncorreta()}
 		});
 	}
 	
@@ -54,5 +55,12 @@ public class TesteLogin {
 		page.setSenha(senha);
 		page.logar();	
 		Assert.assertEquals(resposta, dsl.obterTexto(By.xpath(localResposta)));
+	}
+	
+	@Test
+	public void deveLogar() throws IOException {
+		page.setEmail(email);
+		page.setSenha(senha);
+		page.logar();	
 	}
 }

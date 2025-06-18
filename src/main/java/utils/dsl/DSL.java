@@ -126,4 +126,8 @@ public class DSL {
 		alert.accept();
 		return valor;
 	}
+	
+	public void definirUrl(String url) {
+		DriverFactory.getDriver().get(url);
+	}
 }

@@ -57,6 +57,13 @@ public class DSL {
 		Select combo = new Select(element);
 		combo.selectByVisibleText(valor);
 	}
+	
+	public void selecionarComboByPath(String id, String valor) {
+		WebElement element = DriverFactory.getDriver().findElement(By.xpath(id));
+		Select combo = new Select(element);
+		combo.selectByValue(valor);
+	}
+	
 	public void deselecionarCombo(String id, String valor) {
 		WebElement element = DriverFactory.getDriver().findElement(By.id(id));
 		Select combo = new Select(element);
@@ -115,11 +122,16 @@ public class DSL {
 		return obterTexto(By.id(id));
 	}
 	
+	//public String obterListaElementos(String idElementoPai) {
+	//	return DriverFactory.getDriver().findElement(By.id(idElementoPai));
+	//}
+	
     // Alertas 
 	public String alertaObterTexto(){
 		Alert alert = DriverFactory.getDriver().switchTo().alert();
 		return alert.getText();
 	}
+	
 	public String alertaObterTextoEAceita(){
 		Alert alert = DriverFactory.getDriver().switchTo().alert();
 		String valor = alert.getText();

@@ -1,27 +1,27 @@
 package modules.local.tests;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-import org.openqa.selenium.By;
 
+import modules.local.pages.CadastroLocaisPage;
 import modules.local.pages.ListaLocaisPage;
-import utils.driver.DriverFactory;
 import utils.dsl.DSL;
 
 @RunWith(Parameterized.class)
-public class TesteListaLocais {
+public class TesteCadastroLocais {
 	private DSL dsl = new DSL();
 	private static ListaLocaisPage locaisPage = new ListaLocaisPage();
+	private static CadastroLocaisPage cadastroPage = new CadastroLocaisPage();
 	
 	@Parameter
 	public String nome;
@@ -41,10 +41,12 @@ public class TesteListaLocais {
 	}
 	
 	@Test
-	public void deveFiltrarResultadosLista() throws IOException {
-		locaisPage.setFiltroNome(nome);
-		locaisPage.setFiltroStatus(status);
-		locaisPage.filtrar();	
+	public void deveCadastrarLocal() throws IOException {
+		locaisPage.abrirModalCadastro();
+		cadastroPage.setNome(nome);
+		cadastroPage.setStatus(status);
+		cadastroPage.salvar();
+		assertEquals("Local cadastrado com sucesso!", cadastroPage.getTextoMensagemSucesso());
 		
 	}
 }

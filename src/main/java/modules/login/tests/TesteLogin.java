@@ -43,9 +43,7 @@ public class TesteLogin {
 	@Parameters
 	public static Collection<Object[]> getCollection() {
 		return Arrays.asList(new Object[][] {
-			{"tiago@gmail.com", "senha_incorreta", page.getPathMensagemSenhaIncorreta(), page.getMsgSenhaIncorreta()},
-			{"tiago@gmail.com", "123abc", page.getPathMensagemSenhaIncorreta(), page.getMsgSenhaIncorreta()},
-			{"harrison.dietze@aluno.feliz.ifrs.edu.br", "IronBridgeFC",  page.getPathMensagemSenhaIncorreta(), page.getMsgSenhaIncorreta()}
+			{"email@email.com", "senha_incorreta", page.getPathMensagemSenhaIncorreta(), page.getMsgSenhaIncorreta()}
 		});
 	}
 	
@@ -58,9 +56,12 @@ public class TesteLogin {
 	}
 	
 	@Test
-	public void deveLogar() throws IOException {
-		page.setEmail(email);
-		page.setSenha(senha);
-		page.logar();	
+	public void deveLogarComSucesso() throws IOException {
+	    page.setEmail("harrison.dietze@aluno.feliz.ifrs.edu.br");
+	    page.setSenha("IronBridgeFC");
+	    page.logar();
+	    
+	    Assert.assertEquals("http://35.209.123.161/front/", DriverFactory.getDriver().getCurrentUrl());
 	}
+
 }

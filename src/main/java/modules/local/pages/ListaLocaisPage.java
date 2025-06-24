@@ -10,6 +10,8 @@ public class ListaLocaisPage {
 	
 	String pathBotaoFiltrar= "/html/body/app-root/app-container/main/div/app-local/form/div/div[3]/div/button[2]";
 	String pathBotaoLimpar = "/html/body/app-root/app-container/main/div/app-local/form/div/div[3]/div/button[1]";
+	String pathBotaoCadastrar = "/html/body/app-root/app-container/main/div/app-local/form/div/div[3]/div/button[3]";
+	String pathSelectStatus = "//*[@id=\"filtro_status\"]";
 	
 	private DSL dsl = new DSL();
 	
@@ -18,14 +20,22 @@ public class ListaLocaisPage {
 	}
 	
 	public void setFiltroStatus(boolean ativo) {
-		dsl.selecionarCombo("filtro_status", ativo ? "A" : "I");
+		dsl.selecionarComboByPath(pathSelectStatus, ativo ? "A" : "I");
 	}
 	
 	public void filtrar() {
 		dsl.clicarBotao(pathBotaoFiltrar);
-	}	
+	}
+	
+	public void pegarItensLista() {
+		//dsl.obterListaElementos();
+	}
 	
 	public void limpar() {
 		dsl.clicarBotao(pathBotaoLimpar);
+	}	
+	
+	public void abrirModalCadastro() {
+		dsl.clicarBotao(pathBotaoCadastrar);
 	}	
 }

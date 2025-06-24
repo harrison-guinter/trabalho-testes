@@ -18,6 +18,9 @@ import modules.local.pages.ListaLocaisPage;
 import utils.driver.DriverFactory;
 import utils.dsl.DSL;
 
+import static org.junit.Assert.*;
+
+
 @RunWith(Parameterized.class)
 public class TesteListaLocais {
 	private DSL dsl = new DSL();
@@ -31,7 +34,9 @@ public class TesteListaLocais {
 	@Parameters
 	public static Collection<Object[]> getCollection() {
 		return Arrays.asList(new Object[][] {
-			{"teste novo", true}
+			{"Teste novo Ativo", true},
+			{"Teste novo Inativo", false},
+			{"Teste novo Ativo", true}
 		});
 	}
 	
@@ -46,5 +51,17 @@ public class TesteListaLocais {
 		locaisPage.setFiltroStatus(status);
 		locaisPage.filtrar();	
 		
+		var nomeEncontrado = locaisPage.pegarNomePrimeiroItem();
+		
+		assertTrue(nomeEncontrado.contains(nome));
+	}
+	
+	@Test(expected = Exception.class)
+	public void naoDeveEncontrarResultadosLista() throws IOException {
+		locaisPage.setFiltroNome(nome + "----- NOME INCORRETO -----");
+		locaisPage.setFiltroStatus(status);
+		locaisPage.filtrar();	
+		
+		var nomeEncontrado = locaisPage.pegarNomePrimeiroItem();
 	}
 }

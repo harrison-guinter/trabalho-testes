@@ -9,6 +9,6 @@ import modules.local.tests.TesteListaLocais;
 import modules.login.tests.TesteLogin;
 
 @RunWith(Suite.class)
-@SuiteClasses({TesteLogin.class, TesteListaLocais.class, TesteCadastroLocais.class})
+@SuiteClasses({TesteLogin.class, TesteCadastroLocais.class,  TesteListaLocais.class})
 public class TestSuite {
 }

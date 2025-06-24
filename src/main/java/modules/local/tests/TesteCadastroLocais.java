@@ -3,6 +3,7 @@ package modules.local.tests;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -27,11 +28,17 @@ public class TesteCadastroLocais {
 	public String nome;
 	@Parameter(value=1)
 	public boolean status;
+	@Parameter(value=2)
+	public String conteudoMensagem;
 	
 	@Parameters
 	public static Collection<Object[]> getCollection() {
+		var id = LocalDateTime.now().getNano();
+		
 		return Arrays.asList(new Object[][] {
-			{"teste novo", true}
+			{"Teste novo Ativo" + id, true, "Sucesso\nLocal cadastrado com sucesso!"},
+			{"Teste novo Inativo" + id, false, "Sucesso\nLocal cadastrado com sucesso!"},
+			{"Teste novo Ativo" + id, true, "Erro\nJá existe um Local com o mesmo nome!"},
 		});
 	}
 	
@@ -41,12 +48,12 @@ public class TesteCadastroLocais {
 	}
 	
 	@Test
-	public void deveCadastrarLocal() throws IOException {
+	public void deveCadastrarLocalVerificandoMensagem() throws IOException {
 		locaisPage.abrirModalCadastro();
 		cadastroPage.setNome(nome);
 		cadastroPage.setStatus(status);
 		cadastroPage.salvar();
-		assertEquals("Local cadastrado com sucesso!", cadastroPage.getTextoMensagemSucesso());
-		
+		assertEquals(conteudoMensagem, cadastroPage.getTextoMensagem());
 	}
+	
 }

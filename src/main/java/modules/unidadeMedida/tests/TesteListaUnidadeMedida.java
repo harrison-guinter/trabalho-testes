@@ -14,7 +14,6 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.By;
 
-//import modules.login.pages.LoginPage;
 import modules.unidadeMedida.pages.ListaUnidadeMedidaPage;
 import utils.driver.DriverFactory;
 import utils.dsl.DSL;
@@ -52,7 +51,7 @@ public class TesteListaUnidadeMedida {
 	public void deveFiltrarResultadosLista() throws IOException {
 		medidasPage.setFiltroDescricao(nome);
 		medidasPage.setFiltroStatus(status);
-		medidasPage.filtrar();	
+		medidasPage.filtrar();
 		
 		var nomeEncontrado = medidasPage.pegarNomePrimeiroItem();
 		
@@ -65,6 +64,22 @@ public class TesteListaUnidadeMedida {
 		medidasPage.setFiltroStatus(status);
 		medidasPage.filtrar();	
 		
+		assertEquals("Atenção\nMedida não encontrada.",medidasPage.getTextoMensagem());
+
 		var nomeEncontrado = medidasPage.pegarNomePrimeiroItem();
+	}
+	
+	@Test
+	public void deveInativarUnidadeMedida() throws IOException {
+		var ItemInativado = medidasPage.pegarNomePrimeiroItem();
+		medidasPage.inativarItem();
+		medidasPage.confirmarInativacao();
+		assertEquals("Sucesso\nMedida inativada com sucesso!", medidasPage.getTextoMensagem());
+		medidasPage.setFiltroDescricao(ItemInativado);
+		medidasPage.setFiltroStatus(false);
+		medidasPage.filtrar();
+		var nomeEncontrado = medidasPage.pegarNomePrimeiroItem();
+		
+		assertTrue(nomeEncontrado.contains(ItemInativado));
 	}
 }

@@ -66,4 +66,18 @@ public class TesteListaMarca {
 		
 		var nomeEncontrado = marcaPage.pegarNomePrimeiroItem();
 	}
+	
+	@Test
+	public void deveInativarMarca() throws IOException {
+		var ItemInativado = marcaPage.pegarNomePrimeiroItem();
+		marcaPage.inativarItem();
+		marcaPage.confirmarInativacao();
+		assertEquals("Sucesso\nMarca inativada com sucesso!", marcaPage.getTextoMensagem());
+		marcaPage.setFiltroNome(ItemInativado);
+		marcaPage.setFiltroStatus(false);
+		marcaPage.filtrar();
+		var nomeEncontrado = marcaPage.pegarNomePrimeiroItem();
+		
+		assertTrue(nomeEncontrado.contains(ItemInativado));
+	}
 }

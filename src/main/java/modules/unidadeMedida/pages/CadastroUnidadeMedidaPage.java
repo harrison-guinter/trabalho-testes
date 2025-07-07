@@ -12,7 +12,6 @@ public class CadastroUnidadeMedidaPage {
 	String pathBotaoSalvar = "/html/body/app-root/app-container/main/div/app-unidade-medida/div[1]/div/div/form/div[2]/button[2]";
 	String pathBotaoVoltar = "/html/body/app-root/app-container/main/div/app-unidade-medida/div[1]/div/div/form/div[2]/button[1]";
 	String pathSelectStatus = "//*[@id=\"status\"]";
-	String pathMensagem = "/html/body/app-root/app-container/main/div/app-unidade-medida/p-toast/div/p-toastitem/div/div/div";
 	
 	
 	private DSL dsl = new DSL();
@@ -31,10 +30,5 @@ public class CadastroUnidadeMedidaPage {
 	
 	public void voltar() {
 		dsl.clicarBotao(pathBotaoVoltar);
-	}	
-	
-	public String getTextoMensagem() {
-		return dsl.obterTexto(By.xpath(pathMensagem));
 	}
-
 }

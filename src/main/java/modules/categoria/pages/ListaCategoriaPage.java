@@ -13,9 +13,12 @@ public class ListaCategoriaPage {
 	String pathBotaoFiltrar= "/html/body/app-root/app-container/main/div/app-categoria/form/div/div[3]/div/button[2]";
 	String pathBotaoLimpar = "/html/body/app-root/app-container/main/div/app-categoria/form/div/div[3]/div/button[1]";
 	String pathBotaoCadastrar = "/html/body/app-root/app-container/main/div/app-categoria/form/div/div[3]/div/button[3]";
-	String pathBotaoInativar = "/html/body/app-root/app-container/main/div/app-categoria/div[2]/table/tbody/tr[1]/td[4]/i";
 	String pathSelectStatus = "//*[@id=\"filtro_status\"]";
 	String pathMensagem = "/html/body/app-root/app-container/main/div/app-categoria/p-toast/div/p-toastitem/div/div/div";
+	String pathBotaoEditar = "/html/body/app-root/app-container/main/div/app-categoria/div[2]/table/tbody/tr[1]/td[3]/i";
+	String pathBotaoInativar = "/html/body/app-root/app-container/main/div/app-categoria/div[2]/table/tbody/tr[1]/td[4]/i";
+	String pathInativarBotaoSalvar = "/html/body/app-root/app-container/main/div/app-categoria/app-confirm-modal/div/div/div/div[3]/button[2]";
+	String pathInativarBotaoVoltar = "/html/body/app-root/app-container/main/div/app-categoria/app-confirm-modal/div/div/div/div[3]/button[1]";
 	
 	private DSL dsl = new DSL();
 	
@@ -39,9 +42,13 @@ public class ListaCategoriaPage {
 		dsl.clicarBotao(pathBotaoCadastrar);
 	}	
 	
-	public void excluirItem() {
+	public void inativarItem() {
 		dsl.clicarBotao(pathBotaoInativar);
-	}	
+	}
+	
+	public void editarItem() {
+		dsl.clicarBotao(pathBotaoEditar);
+	}
 	
 	public String pegarNomePrimeiroItem() {
 		return dsl.obterTexto(By.xpath(pathPrimeiroItemNome));
@@ -49,6 +56,14 @@ public class ListaCategoriaPage {
 	
 	public String getTextoMensagem() {
 		return dsl.obterTexto(By.xpath(pathMensagem));
+	}
+	
+	public void confirmarInativacao() {
+		dsl.clicarBotao(pathInativarBotaoSalvar);
+	}
+	
+	public void cancelarInativacao() {
+		dsl.clicarBotao(pathInativarBotaoVoltar);
 	}
 	
 }

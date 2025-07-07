@@ -65,4 +65,17 @@ public class TesteListaCategoria {
 		
 		var nomeEncontrado = categoriaPage.pegarNomePrimeiroItem();
 	}
+	
+	public void deveInativarCategoria() throws IOException {
+		var ItemInativado = categoriaPage.pegarNomePrimeiroItem();
+		categoriaPage.inativarItem();
+		categoriaPage.confirmarInativacao();
+		assertEquals("Sucesso\nMedida inativada com sucesso!", categoriaPage.getTextoMensagem());
+		categoriaPage.setFiltroNome(ItemInativado);
+		categoriaPage.setFiltroStatus(false);
+		categoriaPage.filtrar();
+		var nomeEncontrado = categoriaPage.pegarNomePrimeiroItem();
+		
+		assertTrue(nomeEncontrado.contains(ItemInativado));
+	}
 }

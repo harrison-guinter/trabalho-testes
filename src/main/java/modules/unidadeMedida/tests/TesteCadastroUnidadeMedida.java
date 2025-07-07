@@ -21,7 +21,7 @@ import utils.dsl.DSL;
 @RunWith(Parameterized.class)
 public class TesteCadastroUnidadeMedida {
 	private DSL dsl = new DSL();
-	private static ListaUnidadeMedidaPage locaisPage = new ListaUnidadeMedidaPage();
+	private static ListaUnidadeMedidaPage unidadeMedidaPage = new ListaUnidadeMedidaPage();
 	private static CadastroUnidadeMedidaPage cadastroPage = new CadastroUnidadeMedidaPage();
 	
 	@Parameter
@@ -29,16 +29,18 @@ public class TesteCadastroUnidadeMedida {
 	@Parameter(value=1)
 	public boolean status;
 	@Parameter(value=2)
-	public String conteudoMensagem;
+	public String conteudoMensagemCadastro;
+	@Parameter(value=3)
+	public String conteudoMensagemEdicao;
 	
 	@Parameters
 	public static Collection<Object[]> getCollection() {
 		var id = LocalDateTime.now().getNano();
 		
 		return Arrays.asList(new Object[][] {
-			{"Teste novo Ativo" + id, true, "Sucesso\nMedida cadastrada com sucesso!"},
-			{"Teste novo Inativo" + id, false, "Sucesso\nMedida cadastrada com sucesso!"},
-			{"Teste novo Ativo" + id, true, "Erro\nJá existe uma Unidade de Medida com a mesma descrição!"},
+			{"Teste novo Ativo" + id, true, "Sucesso\nMedida cadastrada com sucesso!", "Sucesso\nMedida editada com sucesso!"},
+			{"Teste novo Inativo" + id, false, "Sucesso\nMedida cadastrada com sucesso!", "Sucesso\nMedida editada com sucesso!"},
+			{"Teste novo Ativo" + id, true, "Erro\nJá existe uma Unidade de Medida com a mesma descrição!", "Erro\nJá existe uma Unidade de Medida com a mesma descrição!"},
 		});
 	}
 	
@@ -49,11 +51,20 @@ public class TesteCadastroUnidadeMedida {
 	
 	@Test
 	public void deveCadastrarUnidadeMedidaVerificandoMensagem() throws IOException {
-		locaisPage.abrirModalCadastro();
+		unidadeMedidaPage.abrirModalCadastro();
 		cadastroPage.setNome(nome);
 		cadastroPage.setStatus(status);
 		cadastroPage.salvar();
-		assertEquals(conteudoMensagem, cadastroPage.getTextoMensagem());
+		assertEquals(conteudoMensagemCadastro, unidadeMedidaPage.getTextoMensagem());
+	}
+	
+	@Test
+	public void deveEditarUnidadeMedidaVerificandoMensagem() throws IOException {
+		unidadeMedidaPage.editarItem();
+		cadastroPage.setNome(nome + "-testeEdicao");
+		cadastroPage.setStatus(status);
+		cadastroPage.salvar();
+		assertEquals(conteudoMensagemEdicao, unidadeMedidaPage.getTextoMensagem());
 	}
 	
 }

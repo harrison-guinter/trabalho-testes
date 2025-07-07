@@ -29,16 +29,18 @@ public class TesteCadastroMarca {
 	@Parameter(value=1)
 	public boolean status;
 	@Parameter(value=2)
-	public String conteudoMensagem;
+	public String conteudoMensagemCadastro;
+	@Parameter(value=3)
+	public String conteudoMensagemEdicao;
 	
 	@Parameters
 	public static Collection<Object[]> getCollection() {
 		var id = LocalDateTime.now().getNano();
 		
 		return Arrays.asList(new Object[][] {
-			{"Teste novo Ativo" + id, true, "Sucesso\nMarca cadastrada com sucesso!"},
-			{"Teste novo Inativo" + id, false, "Sucesso\nMarca cadastrada com sucesso!"},
-			{"Teste novo Ativo" + id, true, "Erro\nJá existe uma Marca com o mesmo nome!"},
+			{"Teste novo Ativo" + id, true, "Sucesso\nMarca cadastrada com sucesso!","Sucesso\nMarca editada com sucesso!"},
+			{"Teste novo Inativo" + id, false, "Sucesso\nMarca cadastrada com sucesso!","Sucesso\nMarca editada com sucesso!"},
+			{"Teste novo Ativo" + id, true, "Erro\nJá existe uma Marca com o mesmo nome!","Erro\nJá existe uma Marca com o mesmo nome!"},
 		});
 	}
 	
@@ -48,12 +50,21 @@ public class TesteCadastroMarca {
 	}
 	
 	@Test
-	public void deveCadastrarLocalVerificandoMensagem() throws IOException {
+	public void deveCadastrarMarcaVerificandoMensagem() throws IOException {
 		marcaPage.abrirModalCadastro();
 		cadastroPage.setNome(nome);
 		cadastroPage.setStatus(status);
 		cadastroPage.salvar();
-		assertEquals(conteudoMensagem, marcaPage.getTextoMensagem());
+		assertEquals(conteudoMensagemCadastro, marcaPage.getTextoMensagem());
+	}
+	
+	@Test
+	public void deveEditarMarcaVerificandoMensagem() throws IOException {
+		marcaPage.editarItem();
+		cadastroPage.setNome(nome + "-testeEdicao");
+		cadastroPage.setStatus(status);
+		cadastroPage.salvar();
+		assertEquals(conteudoMensagemEdicao, marcaPage.getTextoMensagem());
 	}
 	
 }

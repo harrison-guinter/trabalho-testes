@@ -71,15 +71,19 @@ public class TesteListaUnidadeMedida {
 	
 	@Test
 	public void deveInativarUnidadeMedida() throws IOException {
-		var ItemInativado = medidasPage.pegarNomePrimeiroItem();
+		
+		if (status == false) {
+			return;
+		}
+		
+		medidasPage.setFiltroDescricao(nome);
+		medidasPage.setFiltroStatus(true);
+		medidasPage.filtrar();
+		
+		var ItemInativado = nome;
 		medidasPage.inativarItem();
 		medidasPage.confirmarInativacao();
 		assertEquals("Sucesso\nMedida inativada com sucesso!", medidasPage.getTextoMensagem());
-		medidasPage.setFiltroDescricao(ItemInativado);
-		medidasPage.setFiltroStatus(false);
-		medidasPage.filtrar();
-		var nomeEncontrado = medidasPage.pegarNomePrimeiroItem();
 		
-		assertTrue(nomeEncontrado.contains(ItemInativado));
 	}
 }

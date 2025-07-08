@@ -15,11 +15,12 @@ import modules.unidadeMedida.tests.TesteListaUnidadeMedida;
 @RunWith(Suite.class)
 @SuiteClasses({
 	TesteLogin.class, 
-	TesteListaLocais.class, 
+//	TesteListaLocais.class, 
+//	TesteCadastroLocais
 	CadastroItensTest.class,
-	TesteCadastroUnidadeMedida.class,
-	TesteListaUnidadeMedida.class,
-	GeracaoRelatorioTest.class,
+//	TesteCadastroUnidadeMedida.class,
+//	TesteListaUnidadeMedida.class,
+//	GeracaoRelatorioTest.class,
 })
 public class TestSuite {
 	

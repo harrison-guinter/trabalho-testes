@@ -17,7 +17,7 @@ public class CadastroItensPage {
     private final String pathMensagem = "/html/body/app-root/app-container/main/div/app-item/p-toast/div";
 
     private final String pathStatus = "//*[@id='status']";
-    private final String pathCodigo = "codigo";
+    private final String pathCodigo = "//*[@id=\"codigo\"]";
     private final String pathNome = "nome";
     private final String pathUnidadeMedida = "//*[@id='unidadeMedidaId']";
     private final String pathCategoria = "//*[@id='categoriaId']";
@@ -27,11 +27,11 @@ public class CadastroItensPage {
     private final String pathObservacoes = "observacoes";
 
     public void setStatus(String valor) {
-        dsl.selecionarComboByPath(pathStatus, valor); // "A" ou "I"
+        dsl.selecionarComboByPath(pathStatus, valor);
     }
 
     public void setCodigo(String valor) {
-        dsl.escrever(pathCodigo, valor);
+        dsl.escrever(By.xpath(pathCodigo), valor);
     }
 
     public void setNome(String valor) {

@@ -44,10 +44,12 @@ public class TesteListaLocais {
 	}
 	
 	@Test
-	public void deveFiltrarResultadosLista() throws IOException {
+	public void deveFiltrarResultadosLista() throws IOException, InterruptedException {
 		locaisPage.setFiltroNome(nome);
 		locaisPage.setFiltroStatus(status);
 		locaisPage.filtrar();	
+		
+		Thread.sleep(100);
 		
 		var nomeEncontrado = locaisPage.pegarNomePrimeiroItem();
 		
@@ -55,7 +57,7 @@ public class TesteListaLocais {
 	}
 	
 	@Test(expected = Exception.class)
-	public void naoDeveEncontrarResultadosLista() throws IOException {
+	public void naoDeveEncontrarResultadosLista() {
 		locaisPage.setFiltroNome(nome + "----- NOME INCORRETO -----");
 		locaisPage.setFiltroStatus(status);
 		locaisPage.filtrar();	

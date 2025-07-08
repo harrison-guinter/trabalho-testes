@@ -56,11 +56,12 @@ public class TesteLogin {
 	}
 	
 	@Test
-	public void deveLogarComSucesso() throws IOException {
+	public void deveLogarComSucesso() throws IOException, InterruptedException {
 	    page.setEmail("harrison.dietze@aluno.feliz.ifrs.edu.br");
 	    page.setSenha("IronBridgeFC");
 	    page.logar();
 	    
+	    Thread.sleep(500);
 	    Assert.assertEquals("http://35.209.123.161/front/", DriverFactory.getDriver().getCurrentUrl());
 	}
 

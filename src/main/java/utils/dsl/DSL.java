@@ -25,8 +25,10 @@ public class DSL {
 	
 	// TextFields e TextAreas
 	public void escrever(By by, String texto){
-		wait(by);
-		DriverFactory.getDriver().findElement(by).clear();
+//		wait(by);
+		
+		System.out.println(DriverFactory.getDriver().findElement(by));
+//		DriverFactory.getDriver().findElement(by).clear();
 		DriverFactory.getDriver().findElement(by).sendKeys(texto);
 	}
 	public void escrever(String idCampo, String texto){

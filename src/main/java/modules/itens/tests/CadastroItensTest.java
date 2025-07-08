@@ -72,12 +72,12 @@ public class CadastroItensTest {
 
 	@Before
 	public void irParaPagina() {
-		dsl.definirUrl("http://35.209.123.161/front/itens");
+		dsl.definirUrl("http://35.209.123.161/front/cadastro-item");
 	}
 
 	@Test
 	public void deveCadastrarItemVerificandoMensagem() throws IOException {
-		listaPage.abrirFormularioNovoItem();
+		
 		cadastroPage.setCodigo(codigo);
 		cadastroPage.setNome(nome);
 		cadastroPage.setStatus(statusAtivo ? "A" : "I");

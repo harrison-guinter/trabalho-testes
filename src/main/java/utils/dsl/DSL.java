@@ -44,6 +44,12 @@ public class DSL {
 	public boolean isRadioMarcado(String id){
 		return DriverFactory.getDriver().findElement(By.id(id)).isSelected();
 	}
+	public boolean isEnabled(By by){
+		return DriverFactory.getDriver().findElement(by).isEnabled();
+	}
+	public boolean isEnabled(String id){
+		return DriverFactory.getDriver().findElement(By.id(id)).isEnabled();
+	}
 	public void clicarCheck(String id) {
 		DriverFactory.getDriver().findElement(By.id(id)).click();
 	}

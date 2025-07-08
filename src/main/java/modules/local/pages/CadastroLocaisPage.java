@@ -35,5 +35,9 @@ public class CadastroLocaisPage {
 	public String getTextoMensagem() {
 		return dsl.obterTexto(By.xpath(pathMensagem));
 	}
+	
+	public boolean isBotaoSalvarBloqueado() {
+		return !dsl.isEnabled(By.xpath(pathBotaoSalvar));
+	}
 
 }

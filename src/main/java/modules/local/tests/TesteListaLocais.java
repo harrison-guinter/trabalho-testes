@@ -4,18 +4,15 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-import org.openqa.selenium.By;
 
 import modules.local.pages.ListaLocaisPage;
-import utils.driver.DriverFactory;
+
 import utils.dsl.DSL;
 
 import static org.junit.Assert.*;
@@ -31,12 +28,13 @@ public class TesteListaLocais {
 	@Parameter(value=1)
 	public boolean status;
 	
+	private String conteudoMensagemInativacao = "Sucesso\nLocal inativado com sucesso!";
+	
 	@Parameters
 	public static Collection<Object[]> getCollection() {
 		return Arrays.asList(new Object[][] {
 			{"Teste novo Ativo", true},
-			{"Teste novo Inativo", false},
-			{"Teste novo Ativo", true}
+			{"Teste novo Inativo", false}
 		});
 	}
 	
@@ -64,4 +62,16 @@ public class TesteListaLocais {
 		
 		var nomeEncontrado = locaisPage.pegarNomePrimeiroItem();
 	}
+	
+
+	@Test
+	public void deveInativar() throws IOException {
+		if (status == false) {
+			return;
+		}
+		locaisPage.abrirModalInativacao(nome, status);
+		locaisPage.confirmarDesativacao();
+		assertEquals(conteudoMensagemInativacao, locaisPage.getTextoMensagem());
+	}
+
 }

@@ -7,8 +7,10 @@ import org.junit.runners.Suite.SuiteClasses;
 import modules.local.tests.TesteCadastroLocais;
 import modules.local.tests.TesteListaLocais;
 import modules.login.tests.TesteLogin;
+import modules.relatorio.tests.GeracaoRelatorioTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({TesteLogin.class, TesteCadastroLocais.class,  TesteListaLocais.class})
+@SuiteClasses({TesteLogin.class, GeracaoRelatorioTest.class})
 public class TestSuite {
+	
 }

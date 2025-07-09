@@ -1,4 +1,7 @@
-package modules.local.tests;
+package modules.itens.tests;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -6,38 +9,29 @@ import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import modules.itens.pages.ListaItensPage;
 import modules.local.pages.ListaLocaisPage;
-
 import utils.dsl.DSL;
 
-import static org.junit.Assert.*;
+public class ListaItensTest {
 
-
-@RunWith(Parameterized.class)
-public class TesteListaLocais {
 	private DSL dsl = new DSL();
-	private static ListaItensPage locaisPage = new ListaItensPage();
+	private static ListaLocaisPage locaisPage = new ListaLocaisPage();
 	
 	@Parameter
 	public String nome;
 	@Parameter(value=1)
 	public boolean status;
-	@Parameter(value=2)
-	public String codigo;
 	
-	private String conteudoMensagemInativacao = "Sucesso\nItem inativado com sucesso!";
+	private String conteudoMensagemInativacao = "Sucesso\nLocal inativado com sucesso!";
 	
 	@Parameters
 	public static Collection<Object[]> getCollection() {
 		return Arrays.asList(new Object[][] {
-			{"Item de Teste Ativo", true, "COD"},
-			{"Item de Teste Inativo", false, "COD"}
+			{"Teste novo Ativo", true},
+			{"Teste novo Inativo", false}
 		});
 	}
 	

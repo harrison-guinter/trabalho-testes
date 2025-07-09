@@ -63,16 +63,20 @@ public class CadastroItensTest {
 		var id = LocalDateTime.now().getNano();
 
 		return Arrays.asList(new Object[][] {
-			{ "COD" + id, "Item de Teste " + id, true, "Unidade 1", "Categoria 1", "5", true, false, "Observação teste", 
+			{ "COD" + id, "Item de Teste Ativo" + id, true, "471", "458", "5", true, false, "Observação teste", 
 				"Sucesso\nItem cadastrado com sucesso!", "Sucesso\nItem editado com sucesso!" },
-			{ "COD" + id, "Item de Teste " + id, false, "Unidade 2", "Categoria 2", "0", false, true, "", 
-				"Erro\nJá existe um Item com esse código!", "Erro\nJá existe um Item com esse código!" }
+			{ "COD" + id, "Item de Teste Inativo" + id, false, "471", "458", "0", false, true, "", 
+				"Erro\nError: Já existe um Elemento com o mesmo código!", "Erro\nError: Já existe um Elemento com o mesmo nome!" }
 		});
 	}
 
 	@Before
 	public void irParaPagina() {
 		dsl.definirUrl("http://35.209.123.161/front/cadastro-item");
+	}
+	
+	public void irParaPaginaLista() {
+		dsl.definirUrl("http://35.209.123.161/front/itens");
 	}
 
 	@Test
@@ -94,6 +98,8 @@ public class CadastroItensTest {
 
 	@Test
 	public void deveEditarItemVerificandoMensagem() throws IOException {
+	
+		irParaPaginaLista();
 		listaPage.editarItemExistente(); 
 		cadastroPage.setNome(nome + "-editado");
 		cadastroPage.setStatus(statusAtivo ? "A" : "I");

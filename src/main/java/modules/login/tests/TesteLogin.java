@@ -61,7 +61,7 @@ public class TesteLogin {
 	    page.setSenha("IronBridgeFC");
 	    page.logar();
 	    
-	    Thread.sleep(500);
+	    Thread.sleep(100);
 	    Assert.assertEquals("http://35.209.123.161/front/", DriverFactory.getDriver().getCurrentUrl());
 	}
 

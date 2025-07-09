@@ -47,8 +47,8 @@ public class GeracaoRelatorioTest {
 	@Parameters
 	public static Collection<Object[]> getCollection() {
 		return Arrays.asList(new Object[][] {
-			{ "2024-07-01", "2024-07-07", "Categoria RR74ab3b0a" },
-			{ "2024-06-01", "2024-06-30", "Categoria RR39503269" }
+			{ "2024-07-01", "2024-07-07", "Todas" },
+			{ "2024-06-01", "2024-06-30", "Todas" }
 		});
 	}
 

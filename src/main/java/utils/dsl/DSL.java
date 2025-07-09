@@ -1,5 +1,6 @@
 package utils.dsl;
 
+import java.time.Duration;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utils.driver.DriverFactory;
 import utils.driver.DriverProperty;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 
 // https://www.selenium.dev/documentation/pt-br/guidelines_and_recommendations/domain_specific_language/
 
@@ -25,12 +28,40 @@ public class DSL {
 	
 	// TextFields e TextAreas
 	public void escrever(By by, String texto){
-//		wait(by);
+		wait(by);
 		
-		System.out.println(DriverFactory.getDriver().findElement(by));
-//		DriverFactory.getDriver().findElement(by).clear();
+		DriverFactory.getDriver().findElement(by).clear();
 		DriverFactory.getDriver().findElement(by).sendKeys(texto);
 	}
+	
+	// TextFields e TextAreas
+	public void escreverScroll(By by, String texto) {
+	    WebDriver driver = DriverFactory.getDriver();
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+	    WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
+
+	    // Tenta rolar até o elemento
+	    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+
+	    // Aguarda visibilidade e interatividade
+	    wait.until(ExpectedConditions.visibilityOf(element));
+	    wait.until(ExpectedConditions.elementToBeClickable(element));
+
+
+	    element.clear();
+	    element.sendKeys(texto);
+	}
+
+	private void waitExplicito() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public void escrever(String idCampo, String texto){
 		escrever(By.id(idCampo), texto);
 	}
@@ -54,6 +85,11 @@ public class DSL {
 	}
 	public void clicarCheck(String id) {
 		DriverFactory.getDriver().findElement(By.id(id)).click();
+	}
+	
+	
+	public void clicarCheck(By by) {
+		DriverFactory.getDriver().findElement(by).click();
 	}
 	public boolean isCheckMarcado(String id){
 		return DriverFactory.getDriver().findElement(By.id(id)).isSelected();

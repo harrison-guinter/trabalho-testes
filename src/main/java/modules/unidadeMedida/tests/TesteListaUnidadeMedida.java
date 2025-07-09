@@ -54,7 +54,7 @@ public class TesteListaUnidadeMedida {
 		medidasPage.filtrar();
 		
 		var nomeEncontrado = medidasPage.pegarNomePrimeiroItem();
-		
+		System.out.println(nomeEncontrado);
 		assertTrue(nomeEncontrado.contains(nome));
 	}
 	

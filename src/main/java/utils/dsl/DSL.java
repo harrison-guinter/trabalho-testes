@@ -50,6 +50,9 @@ public class DSL {
 	public boolean isEnabled(String id){
 		return DriverFactory.getDriver().findElement(By.id(id)).isEnabled();
 	}
+	public void clicarCheck(By by) {
+		DriverFactory.getDriver().findElement(by).click();
+	}
 	public void clicarCheck(String id) {
 		DriverFactory.getDriver().findElement(By.id(id)).click();
 	}
